@@ -1,109 +1,71 @@
-TypeScript Backend API Structure for Team/Project Management
-1. Configuration & Tooling
-package.json / package-lock.json: Manages project dependencies and scripts. The package-lock.json ensures consistency across environments by locking versions.
+# TypeScript Backend API for Team/Project Management
 
-tsconfig.json / tsconfig-paths.js: TypeScript configurations for compiling code and managing module resolution with aliases (e.g., @controllers for src/controllers).
+This is a TypeScript-based backend API for managing users, projects, issues, and comments, using **TypeORM**, **Express**, and **PostgreSQL**. The API includes features such as user authentication, CRUD operations for projects and issues, and seeding data for testing.
 
-.eslintrc.json / .eslintignore: Linting configuration to maintain code quality and style consistency. The .eslintignore specifies files to be excluded from linting.
+**Project Owner**: Sunidhi  
+**Task**: LarkLabs Intern Task
 
-.prettierrc: Prettier configuration to format code consistently (e.g., indentation, spacing).
+---
 
-.gitignore: Specifies files/folders to be ignored by Git, like node_modules or build artifacts.
+## Project Structure
 
-2. Database Layer
-src/database: Handles database connections and seeding.
+### 1. **Configuration & Tooling**
+- **package.json / package-lock.json**: Manages project dependencies and scripts.
+- **tsconfig.json / tsconfig-paths.js**: TypeScript configuration and module resolution aliases.
+- **.eslintrc.json / .eslintignore**: Linting configuration for maintaining consistent code style.
+- **.prettierrc**: Prettier configuration to format the code.
+- **.gitignore**: Specifies files and directories to ignore by Git.
 
-createConnection.ts: Configures the PostgreSQL connection using TypeORM.
+### 2. **Database Layer**
+- **src/database**: Contains files for connecting and seeding the database.
+  - `createConnection.ts`: Connects to PostgreSQL using TypeORM.
+  - `createGuestAccount.ts` & `createTestAccount.ts`: Seeders for test data (users, projects, issues, comments).
+  - `resetDatabase.ts`: Resets the database schema for testing.
 
-createGuestAccount.ts & createTestAccount.ts: Seeder scripts to populate the database with demo/test data (users, projects, issues).
+### 3. **Entities (ORM Models)**
+- **src/entities**: Defines TypeORM models that map to database tables.
+  - Includes models for `User`, `Project`, `Issue`, and `Comment`.
 
-resetDatabase.ts: Resets the database schema, useful for testing environments.
+### 4. **Constants & Types**
+- **src/constants**: Contains enums for project categories, issue statuses, and priority.
+- **src/types**: TypeScript types for request/response bodies and environment variables.
 
-3. Entities (ORM Models)
-src/entities: Defines TypeORM models, mapping them to database tables.
+### 5. **Controllers (Business Logic)**
+- **src/controllers**: Contains route handlers for various resources like users, projects, and issues.
+  - Handles user authentication, project CRUD operations, and more.
 
-User, Project, Issue, Comment: Models representing users, projects, issues, and comments. These define table structures and relationships (e.g., User can have many Projects).
+### 6. **Middleware**
+- **src/middleware**: Express middleware for:
+  - Authentication (`authentication.ts`)
+  - Error handling (`errors.ts`)
+  - Response formatting (`response.ts`)
 
-4. Constants & Types
-src/constants: Holds enums for project categories, issue types, and statuses.
+### 7. **Utilities**
+- **src/utils**: Helper functions for common tasks.
+  - Includes functions for JWT generation/validation and TypeORM operations.
 
-src/types: TypeScript types for Express request/response bodies and environment variables.
+### 8. **Serializers**
+- **src/serializers**: Functions for transforming API responses, like issue serialization.
 
-5. Controllers (Business Logic)
-src/controllers: Contains route handlers for core business logic.
+### 9. **Routing**
+- **routes.ts**: Attaches API routes to their corresponding controllers.
 
-Authentication Controller: Handles login, registration, and JWT token generation.
+### 10. **Application Entry Point**
+- **index.ts**: The entry point of the application, sets up the Express server and applies middleware.
 
-Project Controller: Manages CRUD operations for projects.
+---
 
-Issue/Comment Controllers: Manage operations related to issues and comments.
+## Getting Started
 
-Controllers use middleware for validation and error handling.
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (v14 or higher)
+- **npm** (v6 or higher)
+- **PostgreSQL** (v12 or higher)
 
-6. Middleware
-src/middleware: Middleware that processes requests before they reach route handlers.
+### Setup Instructions
 
-Authentication: Verifies JWT tokens for secured routes.
-
-Error Handling: Catches errors and standardizes error responses.
-
-Response Formatting: Ensures consistent response structure.
-
-7. Utilities
-src/utils: Helper functions for common operations.
-
-Validation: Validates incoming data (e.g., checking email formats).
-
-JWT Authentication: Functions for generating, verifying, and decoding JWT tokens.
-
-TypeORM Helpers: Functions to interact with TypeORM models (e.g., creating/updating records).
-
-8. Serializers
-src/serializers: Transforms API responses before sending them to the client.
-
-For example, Issue Serialization could format issue data, removing sensitive fields like passwordHash from the response.
-
-9. Routing
-routes.ts: Defines API routes and links them to corresponding controllers.
-
-Routes are defined by HTTP methods (e.g., GET, POST for user registration, project CRUD operations).
-
-10. Application Entry Point
-index.ts: The entry point of the app. It:
-
-Initializes the Express server.
-
-Applies middleware.
-
-Registers routes.
-
-Starts the application to listen for incoming requests.
-
-Summary:
-This backend API structure is modular and scalable, allowing for easy expansion:
-
-Database setup: Handles connection and seeding.
-
-Entities: ORM models for mapping data to the database.
-
-Controllers: Contains the core business logic for handling API requests.
-
-Middleware: For authentication, error handling, and response formatting.
-
-Utilities: Helper functions for validation and interacting with the database.
-
-Routing: Defines accessible routes and their corresponding controller actions.
-
-Serialization: Used for transforming API responses before sending them to the client.
-
-This approach ensures maintainability, modularity, and extensibility for the application.
-
-This should make it easier for a developer to understand the structure, as it assumes familiarity with the tools and concepts used in the project.
-
-
-
-
-
-
-
-
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/your-repository-name.git
+   cd your-repository-name
