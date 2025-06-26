@@ -26,7 +26,7 @@ const seedUsers = (): Promise<User[]> => {
 
 const seedProject = (users: User[]): Promise<Project> =>
   createEntity(Project, {
-    name: 'singularity 1.0',
+    name: 'LarkLabs Ai',
     url: 'https://www.atlassian.com/software/team',
     description:
       'Plan, track, and manage your agile and software development projects in team. Customize your workflow, collaborate, and release great software.',
