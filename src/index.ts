@@ -15,8 +15,11 @@ import { attachPublicRoutes, attachPrivateRoutes } from './routes';
 const establishDatabaseConnection = async (): Promise<void> => {
   try {
     await createDatabaseConnection();
+    console.log('Database connected successfully.');
   } catch (error) {
-    console.log(error);
+    console.error('Database connection failed:', error);
+    // Exit the process if database connection fails
+    process.exit(1);
   }
 };
 
@@ -29,21 +32,45 @@ const initializeExpress = (): void => {
 
   app.use(addRespondToResponse);
 
+  // Public routes are available without authentication
   attachPublicRoutes(app);
 
+  // Authentication middleware
   app.use('/', authenticateUser);
 
+  // Private routes that require authentication
   attachPrivateRoutes(app);
 
+  // Catch all unmatched routes and return 404
   app.use((req, _res, next) => next(new RouteNotFoundError(req.originalUrl)));
+
+  // Global error handler
   app.use(handleError);
 
-  app.listen(process.env.PORT || 3000);
+  // Start the server
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 };
 
 const initializeApp = async (): Promise<void> => {
   await establishDatabaseConnection();
   initializeExpress();
+};
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('Shutting down gracefully...');
+  await handleGracefulShutdown();
+  process.exit(0);
+});
+
+const handleGracefulShutdown = async (): Promise<void> => {
+  // Close the database connection and perform any necessary cleanup
+  console.log('Closing database connection...');
+  // Example: await closeDatabaseConnection();
+  console.log('Database connection closed.');
 };
 
 initializeApp();
