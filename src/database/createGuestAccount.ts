@@ -23,42 +23,52 @@ const seedUsers = (): Promise<User[]> => {
     createEntity(User, {
       email: 'asjadzaki.larklabsai@gmail.com',
       name: 'Mohammed Asjad Zaki',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'parasakthikumark.larklabsai@gmail.com',
       name: 'Parasakthikumar K',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'balavedhaa.larkLabsAI@gmail.com',
       name: 'Balavedhaa S',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'hemanth.larklabsai@gmail.com',
       name: 'Hemanth kumar J',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'raguladhithya.larklabsai@gmail.com',
       name: 'Ragul Adhithya M',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'vigneswaran.larklabsai@gmail.com',
       name: 'Vigneswaran S',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'mukilarasu.larkLabsAI@gmail.com',
       name: 'Mukilarasu Rasu',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'sirajudeen.larklabsai@gmail.com',
       name: 'Sirajudeen G',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'nishanth.larklabsai@gmail.com',
       name: 'Nishanth S',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
     createEntity(User, {
       email: 'ruksaana.larkLabsAI@gmail.com',
       name: 'Ruksaana R',
+      avatarUrl: 'https://i.ibb.co/6n0hLML/baby-yoda.jpg',
     }),
   ];
   return Promise.all(users);
